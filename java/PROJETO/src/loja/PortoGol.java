@@ -29,6 +29,7 @@ public class PortoGol {
 		double valorTotalCompra = 0.00;
 		final int ESTOQUE_INICIAL = 10;
 		char opcaoPagamento;
+		String codProduto;
 		
 		LocalDate anoCalendario = LocalDate.now();
 		int horaCalendario = Calendar.HOUR;
@@ -73,8 +74,10 @@ public class PortoGol {
 						
 						do {
 							
+							validaResposta = false;
+							codProduto ="";
 							System.out.println("Digite o código do produto desejado: ");
-							String codProduto = leia.nextLine().toUpperCase();
+							codProduto = leia.nextLine().toUpperCase();
 							
 							for (Produto vitrine : loja) {
 								if(vitrine.getCodigo().equals(codProduto)) {
@@ -247,8 +250,15 @@ public class PortoGol {
 						respostaContinuarCompras = leia.next().toUpperCase().charAt(0);
 						respostaContinuarCompras = respostaVoltarPagina.validarSimOuNao(respostaContinuarCompras);	
 						
-						carrinho.clear();
+						for(Produto novoEstoque : loja) {
+							for(Produto estoqueSelecionado : carrinho) {
+								if(novoEstoque.getCodigo().equals(estoqueSelecionado.getCodigo()))
+								novoEstoque.retiraEstoque(estoqueSelecionado.getEstoque());
+							}
+						}
 						
+						carrinho.clear();
+						qtddDesejadaInt = 0;
 						
 					}
 				}
