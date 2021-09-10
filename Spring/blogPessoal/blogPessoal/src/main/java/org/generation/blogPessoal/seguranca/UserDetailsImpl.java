@@ -14,13 +14,15 @@ public class UserDetailsImpl implements UserDetails{
 	
 	private String userName;
 	
-	private String passaWord;
+	private String passWord;
 	
 	public UserDetailsImpl (Usuario user)
 	{
 		this.userName = user.getUsuario();
-		this.passaWord = user.getSenha();
+		this.passWord = user.getSenha();
 	}
+	
+	public UserDetailsImpl () {}
 
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -31,7 +33,7 @@ public class UserDetailsImpl implements UserDetails{
 	@Override
 	public String getPassword() {
 		// TODO Auto-generated method stub
-		return passaWord;
+		return passWord;
 	}
 
 	@Override
